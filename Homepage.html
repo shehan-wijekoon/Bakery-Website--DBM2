@@ -15,8 +15,8 @@
                 <ul>
                     <li><a href="Homepage.html">Home</a></li>
                     <li><a href="#">Menu</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                    <li><a href="About.html">About</a></li>
                     <li><a href="#" class="cart"><img src="Images/shopping-cart.png"></a></li>
                 </ul>
             </nav>
@@ -135,7 +135,7 @@
             <div class="about-content">
                 <h2>About Us</h2>
                 <p>We are passionate about bringing you the finest baked goods, made with love and tradition. Our journey started with a simple mission—to create delicious treats that bring people together.</p>
-                <button class="about-btn">Learn More →</button>
+                <button class="about-btn" onclick="goToAboutUs()">Learn More →</button>
             </div>
         </section>
         <footer class="footer">
@@ -164,9 +164,12 @@
                 </div>
             </div>
         </footer>
-        
     </body>
     <script>
+    function goToAboutUs() {
+    window.location.href = "about.html";
+}
+
     document.addEventListener("DOMContentLoaded", function () {
     const menuItems = document.querySelectorAll(".menu-item");
 
