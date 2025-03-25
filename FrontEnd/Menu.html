@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <title>Items Menu</title>
+    <link rel="stylesheet" href="ItemsMenu.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="logo"><img src="../Images/logo-2.png" alt="Bakery Logo"></div>
+        <nav>
+            <ul>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="About.html">About</a></li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-success" type="button">
+                        View Cart
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h5>Categories</h5>
+                    </header>
+                    <div class="panel-body">
+                        <ul class="category-list" id="category-list">
+                            <li data-category="all">All</li>
+                            <li data-category="Electronics">Electronics</li>
+                            <li data-category="Clothing">Clothing</li>
+                            <li data-category="Home Decor">Home Decor</li>
+                            <li data-category="Accessories">Accessories</li>
+                            <li data-category="Books">Books</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="row justify-content-center" id="grid-container">
+                    <!-- Dynamic grid items will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const items = [
+            { id: 1, image: "https://via.placeholder.com/200", title: "Item 1", category: "Electronics", description: "A high-quality gadget.", price: 5000 },
+            { id: 2, image: "https://via.placeholder.com/200", title: "Item 2", category: "Clothing", description: "A stylish", price: 1500 },
+            { id: 3, image: "https://via.placeholder.com/200", title: "Item 3", category: "Home Decor", description: "Beautiful and elegant home decor.", price: 2500 },
+            { id: 4, image: "https://via.placeholder.com/200", title: "Item 4", category: "Accessories", description: "Trendy and fashionable accessories.", price: 800 },
+            { id: 5, image: "https://via.placeholder.com/200", title: "Item 5", category: "Books", description: "An engaging and informative book.", price: 1200 },
+            { id: 6, image: "https://via.placeholder.com/200", title: "Item 1", category: "Electronics", description: "A high-quality gadget.", price: 5000 },
+            { id: 7, image: "https://via.placeholder.com/200", title: "Item 2", category: "Clothing", description: "A stylish and comfortable outfit.", price: 1500 },
+            { id: 8, image: "https://via.placeholder.com/200", title: "Item 3", category: "Home Decor", description: "Beautiful and elegant home decor.", price: 2500 },
+            { id: 9, image: "https://via.placeholder.com/200", title: "Item 4", category: "Accessories", description: "Trendy and fashionable accessories.", price: 800 }
+        ];
+
+        function renderItems(category = "all") {
+            const container = document.getElementById("grid-container");
+            container.innerHTML = "";
+            items.filter(item => category === "all" || item.category === category)
+                .forEach(item => {
+                    const card = document.createElement("div");
+                    card.className = "col-6 col-md-4 col-lg-3 mb-4";  // Adjusted card spacing
+                    card.innerHTML = `
+                        <div class="card shadow-lg p-2 text-center">
+                            <img src="${item.image}" class="card-img-top" alt="${item.title}">
+                            <div class="card-body">
+                                <h6 class="card-title">${item.title}</h6>
+                                <p class="text-success fw-bold">Rs ${item.price}</p>
+                                <p>${item.description}</p>
+                                <button class="btn btn-danger w-100 mt-1">Add to Cart</button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+        }
+
+        document.getElementById("category-list").addEventListener("click", function (event) {
+            if (event.target.tagName === "LI") {
+                renderItems(event.target.dataset.category);
+            }
+        });
+
+        renderItems();
+    </script>
+</body>
+
+</html>

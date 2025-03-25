@@ -1,0 +1,204 @@
+/* Reset & Global Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: black;
+    overflow-x: hidden;
+    background-color: #f4f4f4;
+}
+
+/* Navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Prevents the content from being hidden behind the fixed navbar */
+body {
+    padding-top: 90px; /* Adjusted for navbar height */
+}
+
+.logo img {
+    height: 70px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+/* Ensures all items are inline and properly aligned */
+nav ul li {
+    display: flex;
+    align-items: center;
+}
+
+/* Navbar links */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s;
+    padding: 10px 15px;
+}
+
+nav ul li a:hover {
+    color: #f1c40f;
+}
+
+/* Fixes the button alignment in navbar */
+nav ul .nav-item {
+    margin-left: 10px;
+}
+
+nav ul .nav-item button {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Fix for panel heading issue */
+.panel-heading {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Card Layout */
+.card {
+    width: 100%;
+    max-width: 250px;
+    min-height: 420px;
+    transition: transform 0.3s ease-in-out;
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    height: 180px; 
+    object-fit: cover;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-success {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Button Fix */
+.add-to-cart {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 12px 0;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    position: relative;
+    margin-top: auto;
+}
+
+.add-to-cart:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}
+
+/* Category List */
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-list li {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+}
+
+.category-list li:hover {
+    background-color: #f8f9fa;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+    }
+
+    .card {
+        max-width: 90%;
+    }
+}
