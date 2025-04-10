@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,24 +12,22 @@
 
     <title>Items Menu</title>
     <link rel="stylesheet" href="ItemsMenu.css">
-
 </head>
 
 <body>
     <header>
-        <div class="logo"><img src="../Images/logo-2.png" alt="Bakery Logo"></div>
+        <div class="logo"><img src="Images/logo-2.png" alt="Bakery Logo"></div>
         <nav>
             <ul>
+                <li><a href="Homepage.html">Home</a></li>
+                <li><a href="Menu.html">Menu</a></li>
                 <li><a href="Contact.html">Contact</a></li>
                 <li><a href="About.html">About</a></li>
-                <li class="nav-item">
-                    <button class="btn btn-outline-success" type="button">
-                        View Cart
-                    </button>
-                </li>
+                <li><a href="#" class="cart"><img src="Images/shopping-cart.png" alt="cart"></a></li>
             </ul>
         </nav>
     </header>
+    
 
     <div class="container-fluid mt-5">
         <div class="row">
@@ -42,11 +39,10 @@
                     <div class="panel-body">
                         <ul class="category-list" id="category-list">
                             <li data-category="all">All</li>
-                            <li data-category="Electronics">Electronics</li>
-                            <li data-category="Clothing">Clothing</li>
-                            <li data-category="Home Decor">Home Decor</li>
-                            <li data-category="Accessories">Accessories</li>
-                            <li data-category="Books">Books</li>
+                            <li data-category="Cakes">Cakes</li>
+                            <li data-category="Cookies">Cookies</li>
+                            <li data-category="Breads">Breads</li>
+                            <li data-category="Pastries">Pastries</li>
                         </ul>
                     </div>
                 </section>
@@ -62,15 +58,18 @@
 
     <script>
         const items = [
-            { id: 1, image: "https://via.placeholder.com/200", title: "Item 1", category: "Electronics", description: "A high-quality gadget.", price: 5000 },
-            { id: 2, image: "https://via.placeholder.com/200", title: "Item 2", category: "Clothing", description: "A stylish", price: 1500 },
-            { id: 3, image: "https://via.placeholder.com/200", title: "Item 3", category: "Home Decor", description: "Beautiful and elegant home decor.", price: 2500 },
-            { id: 4, image: "https://via.placeholder.com/200", title: "Item 4", category: "Accessories", description: "Trendy and fashionable accessories.", price: 800 },
-            { id: 5, image: "https://via.placeholder.com/200", title: "Item 5", category: "Books", description: "An engaging and informative book.", price: 1200 },
-            { id: 6, image: "https://via.placeholder.com/200", title: "Item 1", category: "Electronics", description: "A high-quality gadget.", price: 5000 },
-            { id: 7, image: "https://via.placeholder.com/200", title: "Item 2", category: "Clothing", description: "A stylish and comfortable outfit.", price: 1500 },
-            { id: 8, image: "https://via.placeholder.com/200", title: "Item 3", category: "Home Decor", description: "Beautiful and elegant home decor.", price: 2500 },
-            { id: 9, image: "https://via.placeholder.com/200", title: "Item 4", category: "Accessories", description: "Trendy and fashionable accessories.", price: 800 }
+            { id: 1, image: "Images/Cupcake.png", title: "CupCake", category: "Cakes", description: "Home made and amazing Cupcakes (per 1).", price: 220 },
+            { id: 2, image: "Images/butter cake.jpeg", title: "Butter Cake", category: "Cakes", description: "Freshly good Buuter cake(1kg)", price: 1000 },
+            { id: 3, image: "Images/chocolate brownie.jpg", title: "Chocolate Brownie", category: "Cakes", description: "Amazing Browine for tea party and etc (1kg)", price: 3000 },
+            { id: 4, image: "Images/Chocolate Chip Cookie.png", title: "Chocolate Chip Cookie", category: "Cookies", description: "Chocolate Chip Cookie is Everthing", price: 160 },
+            { id: 5, image: "Images/Peanut Butter Cookies.png", title: "Peanut Butter Cookies", category: "Cookies", description: "Peanut Butter Cookies is Everthing", price: 130 },
+            { id: 5, image: "Images/normal bread.jpeg", title: "Bread", category: "Breads", description: "Good and fresh Bread", price: 100 },
+            { id: 6, image: "Images/bread.png", title: "Slies Bread", category: "Breads", description: "Good and fresh Bread", price: 130 },
+            { id: 7, image: "Images/chocolate cake.png", title: "Chocolate Cake", category: "Cakes", description: "Chocolate Cake for you and me (1kg).", price: 1200 },
+            { id: 8, image: "Images/Classic Pretzel.png", title: "Classic Pretzel", category: "Pastries", description: "A high-quality Pastries (per 1).", price: 120 },
+            { id: 9, image: "Images/Fish Rolls.jpg", title: "Fish Rolls", category: "Pastries", description: "Great for Tea Time(per 1).", price: 90 },
+            { id: 10, image: "Images/fish buns.jpg", title: "Fish Buns", category: "Pastries", description: "Beautiful and Hots Fish buns(per 1).", price: 70 },
+            { id: 11, image: "Images/Donut.jpeg", title: "Donut", category: "Pastries", description: "Take one of our amazing Donuts (per 1).", price: 120 }
         ];
 
         function renderItems(category = "all") {
@@ -103,6 +102,32 @@
 
         renderItems();
     </script>
+     <footer class="footer">
+        <div class="footer-overlay"></div>
+        <div class="footer-content">
+    
+            <div class="footer-left">
+                <h4>Open Every Day:</h4>
+                <p><strong>Monday-Friday:</strong> 6am – 5pm</p>
+                <p><strong>Weekends:</strong> 7am – 4pm</p>
+    
+                <h4>Visit Us</h4>
+                <p><strong>Kandy</strong></p>
+                <p>Sri Lanka</p>
+            </div>
+ 
+            <div class="footer-right">
+                <div class="footer-logo">
+                    <img src="Images/logo-2.png">
+                </div>
+                <div class="social-icons">
+                    <a href="ImagesIcons/facebook-icon.png" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="Images/Icons/Gmail -icon.png" title="Email"><i class="fab fa-x-email"></i></a>
+                    <a href="Images/Icons/instagram-white-icon.png" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
