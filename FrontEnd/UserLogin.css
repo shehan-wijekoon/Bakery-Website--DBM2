@@ -1,0 +1,17 @@
+.hidden {
+    display: none;
+}
+.card {
+    min-height: 600px; /* Adjust as needed */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.col-md-6.col-lg-5 img {
+    min-height: 100%; /* Makes sure the image stretches to fill the height */
+    object-fit: cover; /* Keeps the image aspect ratio while filling the space */
+}
