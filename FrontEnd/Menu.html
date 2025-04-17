@@ -23,7 +23,7 @@
                 <li><a href="Menu.html">Menu</a></li>
                 <li><a href="Contact.html">Contact</a></li>
                 <li><a href="About.html">About</a></li>
-                <li><a href="#" class="cart"><img src="Images/shopping-cart.png" alt="cart"></a></li>
+                <li><a href="Cart.html" class="cart"><img src="Images/shopping-cart.png" alt="cart"></a></li>
             </ul>
         </nav>
     </header>
@@ -59,26 +59,26 @@
     <script>
         const items = [
             { id: 1, image: "Images/Cupcake.png", title: "CupCake", category: "Cakes", description: "Home made and amazing Cupcakes (per 1).", price: 220 },
-            { id: 2, image: "Images/butter cake.jpeg", title: "Butter Cake", category: "Cakes", description: "Freshly good Buuter cake(1kg)", price: 1000 },
-            { id: 3, image: "Images/chocolate brownie.jpg", title: "Chocolate Brownie", category: "Cakes", description: "Amazing Browine for tea party and etc (1kg)", price: 3000 },
-            { id: 4, image: "Images/Chocolate Chip Cookie.png", title: "Chocolate Chip Cookie", category: "Cookies", description: "Chocolate Chip Cookie is Everthing", price: 160 },
-            { id: 5, image: "Images/Peanut Butter Cookies.png", title: "Peanut Butter Cookies", category: "Cookies", description: "Peanut Butter Cookies is Everthing", price: 130 },
-            { id: 5, image: "Images/normal bread.jpeg", title: "Bread", category: "Breads", description: "Good and fresh Bread", price: 100 },
-            { id: 6, image: "Images/bread.png", title: "Slies Bread", category: "Breads", description: "Good and fresh Bread", price: 130 },
-            { id: 7, image: "Images/chocolate cake.png", title: "Chocolate Cake", category: "Cakes", description: "Chocolate Cake for you and me (1kg).", price: 1200 },
-            { id: 8, image: "Images/Classic Pretzel.png", title: "Classic Pretzel", category: "Pastries", description: "A high-quality Pastries (per 1).", price: 120 },
-            { id: 9, image: "Images/Fish Rolls.jpg", title: "Fish Rolls", category: "Pastries", description: "Great for Tea Time(per 1).", price: 90 },
-            { id: 10, image: "Images/fish buns.jpg", title: "Fish Buns", category: "Pastries", description: "Beautiful and Hots Fish buns(per 1).", price: 70 },
-            { id: 11, image: "Images/Donut.jpeg", title: "Donut", category: "Pastries", description: "Take one of our amazing Donuts (per 1).", price: 120 }
+            { id: 2, image: "Images/butter cake.jpeg", title: "Butter Cake", category: "Cakes", description: "Freshly good Butter cake (1kg)", price: 1000 },
+            { id: 3, image: "Images/chocolate brownie.jpg", title: "Chocolate Brownie", category: "Cakes", description: "Amazing Brownie for tea party etc (1kg)", price: 3000 },
+            { id: 4, image: "Images/Chocolate Chip Cookie.png", title: "Chocolate Chip Cookie", category: "Cookies", description: "Chocolate Chip Cookie is Everything", price: 160 },
+            { id: 5, image: "Images/Peanut Butter Cookies.png", title: "Peanut Butter Cookies", category: "Cookies", description: "Peanut Butter Cookies is Everything", price: 130 },
+            { id: 6, image: "Images/normal bread.jpeg", title: "Bread", category: "Breads", description: "Good and fresh Bread", price: 100 },
+            { id: 7, image: "Images/bread.png", title: "Sliced Bread", category: "Breads", description: "Good and fresh Bread", price: 130 },
+            { id: 8, image: "Images/chocolate cake.png", title: "Chocolate Cake", category: "Cakes", description: "Chocolate Cake for you and me (1kg).", price: 1200 },
+            { id: 9, image: "Images/Classic Pretzel.png", title: "Classic Pretzel", category: "Pastries", description: "A high-quality Pastry (per 1).", price: 120 },
+            { id: 10, image: "Images/Fish Rolls.jpg", title: "Fish Rolls", category: "Pastries", description: "Great for Tea Time (per 1).", price: 90 },
+            { id: 11, image: "Images/fish buns.jpg", title: "Fish Buns", category: "Pastries", description: "Beautiful and Hot Fish Buns (per 1).", price: 70 },
+            { id: 12, image: "Images/Donut.jpeg", title: "Donut", category: "Pastries", description: "Take one of our amazing Donuts (per 1).", price: 120 }
         ];
-
+    
         function renderItems(category = "all") {
             const container = document.getElementById("grid-container");
             container.innerHTML = "";
             items.filter(item => category === "all" || item.category === category)
                 .forEach(item => {
                     const card = document.createElement("div");
-                    card.className = "col-6 col-md-4 col-lg-3 mb-4";  // Adjusted card spacing
+                    card.className = "col-6 col-md-4 col-lg-3 mb-4";
                     card.innerHTML = `
                         <div class="card shadow-lg p-2 text-center">
                             <img src="${item.image}" class="card-img-top" alt="${item.title}">
@@ -86,22 +86,38 @@
                                 <h6 class="card-title">${item.title}</h6>
                                 <p class="text-success fw-bold">Rs ${item.price}</p>
                                 <p>${item.description}</p>
-                                <button class="btn btn-danger w-100 mt-1">Add to Cart</button>
+                                <button class="btn btn-danger w-100 mt-1" onclick="addToCart(${item.id})">Add to Cart</button>
                             </div>
                         </div>
                     `;
                     container.appendChild(card);
                 });
         }
-
+    
+        function addToCart(id) {
+            const item = items.find(product => product.id === id);
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+            const existingItem = cart.find(cartItem => cartItem.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+    
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${item.title} added to cart!`);
+        }
+    
         document.getElementById("category-list").addEventListener("click", function (event) {
             if (event.target.tagName === "LI") {
                 renderItems(event.target.dataset.category);
             }
         });
-
+    
         renderItems();
     </script>
+    
      <footer class="footer">
         <div class="footer-overlay"></div>
         <div class="footer-content">
