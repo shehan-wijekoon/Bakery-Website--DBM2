@@ -8,9 +8,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>    
-  
-
+        
+        
+        
+        <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="ItemsMenu.css">
+         
+      
+        
+        
     <title>Items Menu</title>
     <link rel="stylesheet" href="ItemsMenu.css">
 </head>
@@ -24,8 +31,15 @@
             <li><a href="Menu.html">Menu</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-            <li><a href="#about">Login</a></li>
+            <li><a href="Cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+            <li class="user-menu">
+              <a href="#" id="user-icon"><i class="fas fa-user"></i></a>
+              <ul class="dropdown" id="user-dropdown">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">SignUp</a></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
       </header>
@@ -60,18 +74,18 @@
 
     <script>
         const items = [
-            { id: 1, image: "Images/Cupcake.png", title: "CupCake", category: "Cakes", description: "Home made and amazing Cupcakes (per 1).", price: 220 },
-            { id: 2, image: "Images/butter cake.jpeg", title: "Butter Cake", category: "Cakes", description: "Freshly good Butter cake (1kg)", price: 1000 },
-            { id: 3, image: "Images/chocolate brownie.jpg", title: "Chocolate Brownie", category: "Cakes", description: "Amazing Brownie for tea party etc (1kg)", price: 3000 },
-            { id: 4, image: "Images/Chocolate Chip Cookie.png", title: "Chocolate Chip Cookie", category: "Cookies", description: "Chocolate Chip Cookie is Everything", price: 160 },
-            { id: 5, image: "Images/Peanut Butter Cookies.png", title: "Peanut Butter Cookies", category: "Cookies", description: "Peanut Butter Cookies is Everything", price: 130 },
-            { id: 6, image: "Images/normal bread.jpeg", title: "Bread", category: "Breads", description: "Good and fresh Bread", price: 100 },
-            { id: 7, image: "Images/bread.png", title: "Sliced Bread", category: "Breads", description: "Good and fresh Bread", price: 130 },
-            { id: 8, image: "Images/chocolate cake.png", title: "Chocolate Cake", category: "Cakes", description: "Chocolate Cake for you and me (1kg).", price: 1200 },
-            { id: 9, image: "Images/Classic Pretzel.png", title: "Classic Pretzel", category: "Pastries", description: "A high-quality Pastry (per 1).", price: 120 },
-            { id: 10, image: "Images/Fish Rolls.jpg", title: "Fish Rolls", category: "Pastries", description: "Great for Tea Time (per 1).", price: 90 },
-            { id: 11, image: "Images/fish buns.jpg", title: "Fish Buns", category: "Pastries", description: "Beautiful and Hot Fish Buns (per 1).", price: 70 },
-            { id: 12, image: "Images/Donut.jpeg", title: "Donut", category: "Pastries", description: "Take one of our amazing Donuts (per 1).", price: 120 }
+            { id: 1, image: "Images/Cupcake.png", title: "CupCake", category: "Cakes", description: " per 1", price: 220 },
+            { id: 2, image: "Images/butter cake.jpeg", title: "Butter Cake", category: "Cakes", description: "1kg", price: 1000 },
+            { id: 3, image: "Images/chocolate brownie.jpg", title: "Chocolate Brownie", category: "Cakes", description: "1kg", price: 3000 },
+            { id: 4, image: "Images/Chocolate Chip Cookie.png", title: "Chocolate Chip Cookie", category: "Cookies", description: "1 cookie", price: 160 },
+            { id: 5, image: "Images/Peanut Butter Cookies.png", title: "Peanut Butter Cookies", category: "Cookies", description: "1 cookie", price: 130 },
+            { id: 6, image: "Images/normal bread.jpeg", title: "Bread", category: "Breads", description: "500g", price: 100 },
+            { id: 7, image: "Images/bread.png", title: "Sliced Bread", category: "Breads", description: "500g", price: 130 },
+            { id: 8, image: "Images/chocolate cake.png", title: "Chocolate Cake", category: "Cakes", description: "1kg", price: 1200 },
+            { id: 9, image: "Images/Classic Pretzel.png", title: "Classic Pretzel", category: "Pastries", description: "per 1", price: 120 },
+            { id: 10, image: "Images/Fish Rolls.jpg", title: "Fish Rolls", category: "Pastries", description: "per 1", price: 90 },
+            { id: 11, image: "Images/fish buns.jpg", title: "Fish Buns", category: "Pastries", description: "per 1", price: 70 },
+            { id: 12, image: "Images/Donut.jpeg", title: "Donut", category: "Pastries", description: "per 1", price: 120 }
         ];
     
         function renderItems(category = "all") {
@@ -87,8 +101,9 @@
                             <div class="card-body">
                                 <h6 class="card-title">${item.title}</h6>
                                 <p class="text-success fw-bold">Rs ${item.price}</p>
-                                <p>${item.description}</p>
-                                <button class="btn btn-danger w-100 mt-1" onclick="addToCart(${item.id})">Add to Cart</button>
+                                <p style="color: white;">${item.description}</p>
+
+                                <button class="btn btn-warning w-100 mt-1" onclick="addToCart(${item.id})">Add to Cart</button>
                             </div>
                         </div>
                     `;

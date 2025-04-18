@@ -67,6 +67,38 @@ nav a:hover {
   color: #ffffff;
 }
 
+
+.user-menu {
+  position: relative;
+}
+
+.user-menu .dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #fff;
+  padding: 10px;
+  list-style: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.user-menu .dropdown li {
+  margin: 5px 0;
+}
+
+.user-menu .dropdown li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.user-menu .dropdown li a:hover {
+  color: #ffae00;
+}
+
+
 .hero {
   background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('Images/heroo.jpg') no-repeat center center/cover;
   height: 90vh;
