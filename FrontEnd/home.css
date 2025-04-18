@@ -77,7 +77,7 @@ nav a:hover {
   position: absolute;
   right: 0;
   top: 100%;
-  background-color: #fff;
+  background-color: #3b3939;
   padding: 10px;
   list-style: none;
   border-radius: 8px;
@@ -90,7 +90,7 @@ nav a:hover {
 }
 
 .user-menu .dropdown li a {
-  color: #333;
+  color: #9f9c9c;
   text-decoration: none;
 }
 
