@@ -5,31 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modern Bakery</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <link rel="stylesheet" href="/normaluser/home.css" />
+  <link rel="stylesheet" href="home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
 
+  
+
+  
 </head>
 <body>
   <header>
-    <img src="/normaluser/Images/logo-2.png" alt="Bakery Logo">
+    <img src="Images/logo-2.png" alt="Bakery Logo">
     <nav>
       <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="/normaluser/Menu.html">Menu</a></li>
+        <li><a href="Homepage.html">Home</a></li>
+        <li><a href="Menu.html">Menu</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-        <li><a href="/normaluser/UserLogin.html">Login</a></li>
+
+        <li><a href="Cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+        <li class="user-menu">
+          <a href="#" id="user-icon"><i class="fas fa-user"></i></a>
+          <ul class="dropdown" id="user-dropdown">
+            <li><a href="UserLogin.html">Login</a></li>
+            <li><a href="#">SignUp</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
   </header>
 
   <section class="hero" id="hero">
     <div>
-
-      <h1>Welcome to Our Bakery</h1>
+      <h1>Welcome to Sweet Bakery</h1>
       <p>Delightful treats baked with passion every day.</p>
-      <button>Order Now</button>
+      <button onclick="window.location.href='Menu.html'">Order Now</button>
+
     </div>
   </section>
 
@@ -116,5 +129,22 @@
       <a href="#"><i class="fab fa-twitter"></i></a>
     </div>
   </footer>
+
+  <script>
+    document.getElementById("user-icon").addEventListener("click", function (e) {
+      e.preventDefault(); // prevent link click from reloading
+      const dropdown = document.getElementById("user-dropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // Optional: Click outside to close dropdown
+    document.addEventListener("click", function (e) {
+      const icon = document.getElementById("user-icon");
+      const dropdown = document.getElementById("user-dropdown");
+      if (!icon.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>

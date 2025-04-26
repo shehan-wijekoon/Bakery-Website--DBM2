@@ -1,26 +1,7 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
 /* Reset & Global Styles */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    color: black;
-    overflow-x: hidden;
-    background-color: #f4f4f4;
-}
-
-.social-icons a {
-    color: white;
-    margin: 0 0.5rem;
-    font-size: 1.4rem;
-    transition: color 0.3s, transform 0.3s;
-  }
-  
-  .social-icons a:hover {
-    color: #00ffd5;
-    transform: scale(1.2);
-  }
-
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -35,8 +16,9 @@ body, html {
     line-height: 1.6;
     overflow-x: hidden;
   }
-  
-  header {
+
+/* Header */
+header {
     background: linear-gradient(145deg, #1e1e1e, #2b2b2b);
     padding: 1rem 2rem;
     display: flex;
@@ -47,7 +29,7 @@ body, html {
     top: 0;
     z-index: 1000;
   }
-  
+
   header img {
     height: 50px;
   }
@@ -87,11 +69,38 @@ body, html {
     color: #ffffff;
   }
   
+  
+  .user-menu {
+    position: relative;
+  }
+  
+  .user-menu .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #fff;
+    padding: 10px;
+    list-style: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+  
+  .user-menu .dropdown li {
+    margin: 5px 0;
+  }
+  
+  .user-menu .dropdown li a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .user-menu .dropdown li a:hover {
+    color: #ffae00;
+  }
 
-
-/*navbar*/
-
-/* Fix for panel heading issue */
+/* Panel Fix */
 .panel-heading {
     background: none !important;
     border: none !important;
@@ -109,7 +118,7 @@ body, html {
     margin: 20px auto;
     border-radius: 15px;
     overflow: hidden;
-    background-color: #fff;
+    background: linear-gradient(145deg, #232323, #2e2e2e);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -140,12 +149,12 @@ body, html {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #333;
+    color: #ffffff;
 }
 
 .card-description {
     font-size: 14px;
-    color: #666;
+    color: #ffffff;
     margin-bottom: 15px;
     flex-grow: 1;
     overflow: hidden;
@@ -156,7 +165,7 @@ body, html {
 .text-success {
     font-size: 18px;
     font-weight: bold;
-    color: #28a745;
+    color: #0be53e;
 }
 
 /* Button Fix */
@@ -198,6 +207,7 @@ body, html {
 .category-list li:hover {
     background-color: #434445;
 }
+
 /* Footer */
 .footer {
     position: relative;
@@ -281,10 +291,8 @@ body, html {
 
     nav ul {
         flex-direction: column;
-        gap: 10px;
-        padding-top: 10px;
-    }
-
+        align-items: center;
+      }
     .card {
         max-width: 90%;
     }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +8,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
-
+        <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="ItemsMenu.css">    
+        
+        
+        
+        
+         
+      
+        
+        
     <title>Items Menu</title>
     <link rel="stylesheet" href="ItemsMenu.css">
 </head>
@@ -20,18 +27,24 @@
     <header>
         <img src="Images/logo-2.png" alt="Bakery Logo">
         <nav>
-            <ul>
-                <li><a href="Homepage.html">Home</a></li>
-                <li><a href="Menu.html">Menu</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="About.html">About</a></li>
-                <li><a href="Cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                <li><span id="usernameDisplay" style="color: white; margin-right: 10px;"></span></li>
-                <li><a href="#" onclick="logout()">Logout</a></li>
+          <ul>
+            <li><a href="Homepage.html">Home</a></li>
+            <li><a href="Menu.html">Menu</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="Cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+            <li class="user-menu">
+                <a href="#" id="user-icon"><i class="fas fa-user"></i></a>
+                <ul class="dropdown" id="user-dropdown">
+                  <li><a href="UserLogin.html">Login</a></li>
+                  <li><a href="#">SignUp</a></li>
+                  <li><a href="#">Logout</a></li>
+                </ul>
+              </li>
             </ul>
-        </nav>
-    </header>
-
+          </nav>
+      </header>
+    
 
     <div class="container-fluid mt-5">
         <div class="row">
@@ -61,22 +74,21 @@
     </div>
 
     <script>
-        /*
         const items = [
-            { id: 1, image: "Images/Cupcake.png", title: "CupCake", category: "Cakes", description: "Home made and amazing Cupcakes (per 1).", price: 220 },
-            { id: 2, image: "Images/butter cake.jpeg", title: "Butter Cake", category: "Cakes", description: "Freshly good Butter cake (1kg)", price: 1000 },
-            { id: 3, image: "Images/chocolate brownie.jpg", title: "Chocolate Brownie", category: "Cakes", description: "Amazing Brownie for tea party etc (1kg)", price: 3000 },
-            { id: 4, image: "Images/Chocolate Chip Cookie.png", title: "Chocolate Chip Cookie", category: "Cookies", description: "Chocolate Chip Cookie is Everything", price: 160 },
-            { id: 5, image: "Images/Peanut Butter Cookies.png", title: "Peanut Butter Cookies", category: "Cookies", description: "Peanut Butter Cookies is Everything", price: 130 },
-            { id: 6, image: "Images/normal bread.jpeg", title: "Bread", category: "Breads", description: "Good and fresh Bread", price: 100 },
-            { id: 7, image: "Images/bread.png", title: "Sliced Bread", category: "Breads", description: "Good and fresh Bread", price: 130 },
-            { id: 8, image: "Images/chocolate cake.png", title: "Chocolate Cake", category: "Cakes", description: "Chocolate Cake for you and me (1kg).", price: 1200 },
-            { id: 9, image: "Images/Classic Pretzel.png", title: "Classic Pretzel", category: "Pastries", description: "A high-quality Pastry (per 1).", price: 120 },
-            { id: 10, image: "Images/Fish Rolls.jpg", title: "Fish Rolls", category: "Pastries", description: "Great for Tea Time (per 1).", price: 90 },
-            { id: 11, image: "Images/fish buns.jpg", title: "Fish Buns", category: "Pastries", description: "Beautiful and Hot Fish Buns (per 1).", price: 70 },
-            { id: 12, image: "Images/Donut.jpeg", title: "Donut", category: "Pastries", description: "Take one of our amazing Donuts (per 1).", price: 120 }
+            { id: 1, image: "Images/Cupcake.png", title: "CupCake", category: "Cakes", description: " per 1", price: 220 },
+            { id: 2, image: "Images/butter cake.jpeg", title: "Butter Cake", category: "Cakes", description: "1kg", price: 1000 },
+            { id: 3, image: "Images/chocolate brownie.jpg", title: "Chocolate Brownie", category: "Cakes", description: "1kg", price: 3000 },
+            { id: 4, image: "Images/Chocolate Chip Cookie.png", title: "Chocolate Chip Cookie", category: "Cookies", description: "1 cookie", price: 160 },
+            { id: 5, image: "Images/Peanut Butter Cookies.png", title: "Peanut Butter Cookies", category: "Cookies", description: "1 cookie", price: 130 },
+            { id: 6, image: "Images/normal bread.jpeg", title: "Bread", category: "Breads", description: "500g", price: 100 },
+            { id: 7, image: "Images/bread.png", title: "Sliced Bread", category: "Breads", description: "500g", price: 130 },
+            { id: 8, image: "Images/chocolate cake.png", title: "Chocolate Cake", category: "Cakes", description: "1kg", price: 1200 },
+            { id: 9, image: "Images/Classic Pretzel.png", title: "Classic Pretzel", category: "Pastries", description: "per 1", price: 120 },
+            { id: 10, image: "Images/Fish Rolls.jpg", title: "Fish Rolls", category: "Pastries", description: "per 1", price: 90 },
+            { id: 11, image: "Images/fish buns.jpg", title: "Fish Buns", category: "Pastries", description: "per 1", price: 70 },
+            { id: 12, image: "Images/Donut.jpeg", title: "Donut", category: "Pastries", description: "per 1", price: 120 }
         ];
-
+    
         function renderItems(category = "all") {
             const container = document.getElementById("grid-container");
             container.innerHTML = "";
@@ -90,110 +102,54 @@
                             <div class="card-body">
                                 <h6 class="card-title">${item.title}</h6>
                                 <p class="text-success fw-bold">Rs ${item.price}</p>
-                                <p>${item.description}</p>
-                                <button class="btn btn-danger w-100 mt-1" onclick="addToCart(${item.id})">Add to Cart</button>
+                                <p style="color: white;">${item.description}</p>
+
+                                <button class="btn btn-warning w-100 mt-1" onclick="addToCart(${item.id})">Add to Cart</button>
                             </div>
                         </div>
                     `;
                     container.appendChild(card);
                 });
         }
-
-        */
-        function renderItems(category = "all") {
-            const container = document.getElementById("grid-container");
-            container.innerHTML = "";
-            items.filter(item => category === "all" || item.category === category)
-                .forEach(item => {
-                    const card = document.createElement("div");
-                    card.className = "col-6 col-md-4 col-lg-3 mb-4";
-                    card.innerHTML = `
-                        <div class="card shadow-lg p-2 text-center">
-                            <img src="${item.image}" class="card-img-top" alt="${item.title}">
-                            <div class="card-body">
-                                <h6 class="card-title">${item.title}</h6>
-                                <p class="text-success fw-bold">Rs ${item.price}</p>
-                                <p>${item.description}</p>
-                                <button class="btn btn-danger w-100 mt-1" onclick="addToCart(${item.id})">Add to Cart</button>
-                            </div>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-        }
-
-        let items = [];
-
-        async function fetchItems() {
-            const res = await fetch("http://localhost:3000/items");
-            const data = await res.json();
-            // Assume backend sends [id, name, price, description, image_url]
-            items = data.map(p => ({
-                id: p[0],
-                title: p[1],
-                price: p[2],
-                description: p[3],
-                image: p[4],
-                category: p[5] || "Uncategorized"
-            }));
-            renderItems();
-        }
-
-        fetchItems();
-
+    
         function addToCart(id) {
             const item = items.find(product => product.id === id);
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
+    
             const existingItem = cart.find(cartItem => cartItem.id === id);
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
                 cart.push({ ...item, quantity: 1 });
             }
-
+    
             localStorage.setItem('cart', JSON.stringify(cart));
             alert(`${item.title} added to cart!`);
         }
-
+    
         document.getElementById("category-list").addEventListener("click", function (event) {
             if (event.target.tagName === "LI") {
                 renderItems(event.target.dataset.category);
             }
         });
-
+    
         renderItems();
-
-
-        // Show username in navbar
-        const username = localStorage.getItem("username");
-        if (username) {
-            document.getElementById("usernameDisplay").textContent = `Hi, ${username}!`;
-        }
-
-        // logout function
-        function logout() {
-            localStorage.removeItem("username");
-            window.location.href = "/"; // go back to homepage or login
-        }
-
-
     </script>
-
-    <footer class="footer">
+    
+     <footer class="footer">
         <div class="footer-overlay"></div>
         <div class="footer-content">
-
+    
             <div class="footer-left">
                 <h4>Open Every Day:</h4>
                 <p><strong>Monday-Friday:</strong> 6am – 5pm</p>
                 <p><strong>Weekends:</strong> 7am – 4pm</p>
-
+    
                 <h4>Visit Us</h4>
                 <p><strong>Kandy</strong></p>
                 <p>Sri Lanka</p>
             </div>
-
+ 
             <div class="footer-right">
                 <div class="footer-logo">
                     <img src="Images/logo-2.png">
@@ -201,8 +157,7 @@
                 <div class="social-icons">
                     <a href="ImagesIcons/facebook-icon.png" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="Images/Icons/Gmail -icon.png" title="Email"><i class="fab fa-x-email"></i></a>
-                    <a href="Images/Icons/instagram-white-icon.png" title="Instagram"><i
-                            class="fab fa-instagram"></i></a>
+                    <a href="Images/Icons/instagram-white-icon.png" title="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
