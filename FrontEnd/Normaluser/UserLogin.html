@@ -145,13 +145,8 @@
                 .then(data => {
                     console.log("Login response:", data);
                     if (data.success) {
-                        console.log("User role:", data.role);
-
-                        if (data.role === 'admin') {
-                            window.location.href = '/adminpanel.html';
-                        } else {
-                            window.location.href = '/Menu.html';
-                        }
+                        localStorage.setItem("username", data.username);
+                        window.location.href = '/normaluser/Menu.html';
                     } else {
                         alert(data.message);
                     }

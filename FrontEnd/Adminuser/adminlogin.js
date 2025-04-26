@@ -1,3 +1,5 @@
+console.log("adminlogin.js loaded ✅");
+
 document.getElementById("login-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -11,7 +13,7 @@ document.getElementById("login-form").addEventListener("submit", function (event
 
     // Validate credentials
     if (email === adminEmail && password === adminPassword) {
-        window.location.href = 'adminpanel.html';
+        window.location.href = '/adminuser/adminpanel.html';
     } else {
         const errorDiv = document.getElementById("login-error");
         errorDiv.classList.remove("d-none");
