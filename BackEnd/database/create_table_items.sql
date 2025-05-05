@@ -7,3 +7,46 @@ CREATE TABLE items (
 );
 
 SELECT * FROM items; 
+
+--Insert
+CREATE OR REPLACE PROCEDURE insert_item(
+    p_name IN items.name%TYPE,
+    p_price IN items.price%TYPE,
+    p_description IN items.description%TYPE,
+    p_image_url IN items.image_url%TYPE
+) AS
+BEGIN
+    INSERT INTO items (name, price, description, image_url)
+    VALUES (p_name, p_price, p_description, p_image_url);
+    COMMIT;
+END;
+/
+
+-- Update
+CREATE OR REPLACE PROCEDURE update_item(
+    p_id IN items.id%TYPE,
+    p_name IN items.name%TYPE,
+    p_price IN items.price%TYPE,
+    p_description IN items.description%TYPE,
+    p_image_url IN items.image_url%TYPE
+) AS
+BEGIN
+    UPDATE items
+    SET name = p_name,
+        price = p_price,
+        description = p_description,
+        image_url = p_image_url
+    WHERE id = p_id;
+    COMMIT;
+END;
+/
+
+-- Delete
+CREATE OR REPLACE PROCEDURE delete_item(
+    p_id IN items.id%TYPE
+) AS
+BEGIN
+    DELETE FROM items WHERE id = p_id;
+    COMMIT;
+END;
+/

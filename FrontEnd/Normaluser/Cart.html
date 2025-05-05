@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="home.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    boby
-    {
-        font-family: Arial, sans-serif;
-        background: #f8f9fa;
+    boby {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
     }
-    .cart-container 
-    {
-        margin-top: 60px;
+
+    .cart-container {
+      margin-top: 60px;
     }
-    .cart-item
-    {
-        border-bottom: 1px soild #ccc;
-        padding: 15px 0;
+
+    .cart-item {
+      border-bottom: 1px soild #ccc;
+      padding: 15px 0;
     }
-    .cart-item img
-    {
-     height :80px;
-     width: auto;   
+
+    .cart-item img {
+      height: 80px;
+      width: auto;
     }
-    .cart-total
-    {
-        font-size: 1.2rem;
-        font-weight: bold;
+
+    .cart-total {
+      font-size: 1.2rem;
+      font-weight: bold;
     }
 
     .user-menu {
-  position: relative;
-}
+      position: relative;
+    }
 
-.user-menu .dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background-color: #3b3939;
-  padding: 10px;
-  list-style: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
+    .user-menu .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: #3b3939;
+      padding: 10px;
+      list-style: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
 
-.user-menu .dropdown li {
-  margin: 5px 0;
-}
+    .user-menu .dropdown li {
+      margin: 5px 0;
+    }
 
-.user-menu .dropdown li a {
-  color: #9f9c9c;
-  text-decoration: none;
-}
+    .user-menu .dropdown li a {
+      color: #9f9c9c;
+      text-decoration: none;
+    }
 
-.user-menu .dropdown li a:hover {
-  color: #ffae00;
-}
-
+    .user-menu .dropdown li a:hover {
+      color: #ffae00;
+    }
   </style>
-   <header>
+
+</head>
+
+<body>
+  <header>
     <img src="Images/logo-2.png" alt="Bakery Logo">
     <nav>
       <ul>
@@ -75,7 +78,10 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#about">About</a></li>
 
-        <li><a href="Cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+        <li><span id="usernameDisplay" style="color: white; margin-right: 10px;"></span></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+
+        <!--
         <li class="user-menu">
           <a href="#" id="user-icon"><i class="fas fa-user"></i></a>
           <ul class="dropdown" id="user-dropdown">
@@ -84,101 +90,187 @@
             <li><a href="#">Logout</a></li>
           </ul>
         </li>
+        -->
+
       </ul>
     </nav>
   </header>
-</head>
-<body>
-    <br><br><br>
-    <div class="container cart-container">
-        <h2 class="mb-4"> Your Cart </h2>
-        <div id="cart-items"></div>
-        <div class="d-flex justify-content-between mt-4">
-            <span class="cart-total">Total: Rs <span id="cart-total">0</span></span>
-            <button class="btn btn-success" onclick="checkout()">Checkout</button>
-        </div>
+  <br><br><br>
+
+  <div class="container cart-container">
+    <h2 class="mb-4">Your Cart</h2>
+    <div id="cart-items"></div>
+    <p class="cart-total">Total: Rs <span id="cart-total">0</span></p>
+    <p><strong>Username:</strong> <span id="bill-username"></span></p>
+
+    <div class="mb-3">
+      <label for="user-address" class="form-label"><strong>Address:</strong></label>
+      <textarea class="form-control" id="user-address" rows="3" placeholder="Enter your delivery address"
+        required></textarea>
     </div>
-    <script>
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
-        function renderCart() {
-          const cartItems = document.getElementById("cart-items");
-          const totalElement = document.getElementById("cart-total");
-          cartItems.innerHTML = "";
-          let total = 0;
-    
-          if (cart.length === 0) {
-            cartItems.innerHTML = "<p>Your cart is empty.</p>";
-            totalElement.textContent = "0";
-            return;
-          }
-    
-          cart.forEach((item, index) => {
-            total += item.price * item.quantity;
-            const div = document.createElement("div");
-            div.className = "row cart-item align-items-center";
-            div.innerHTML = `
-              <div class="col-3"><img src="${item.image}" alt="${item.title}"></div>
-              <div class="col-3">${item.title}</div>
-              <div class="col-2">Rs ${item.price}</div>
-              <div class="col-2">
-                <input type="number" class="form-control" value="${item.quantity}" min="1"
-                  onchange="updateQuantity(${index}, this.value)">
-              </div>
-              <div class="col-2">
-                <button class="btn btn-danger btn-sm" onclick="removeItem(${index})">Remove</button>
-              </div>
-            `;
-            cartItems.appendChild(div);
-          });
-    
-          totalElement.textContent = total;
-        }
-    
-        function updateQuantity(index, quantity) {
-          quantity = parseInt(quantity);
-          if (quantity < 1) return;
-          cart[index].quantity = quantity;
-          localStorage.setItem("cart", JSON.stringify(cart));
-          renderCart();
-        }
-    
-        function removeItem(index) {
-          cart.splice(index, 1);
-          localStorage.setItem("cart", JSON.stringify(cart));
-          renderCart();
-        }
-    
-        function checkout() {
-          if (cart.length === 0) {
-            alert("Your cart is empty!");
-            return;
-          }
-          alert("Thank you for your order!");
+
+    <button class="btn btn-success" onclick="checkout()">Checkout</button>
+  </div>
+
+
+  <div id="bill-summary" class="container cart-container" style="display:none;">
+    <h2 class="mb-4">Bill Summary</h2>
+    <p><strong>Username:</strong> <span id="bill-username"></span></p>
+    <div id="bill-items"></div>
+    <p class="cart-total">Total: Rs <span id="bill-total"></span></p>
+    <button class="btn btn-primary" onclick="saveBill()">Save Bill</button>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+      const cartItems = document.getElementById("cart-items");
+      const totalElement = document.getElementById("cart-total");
+      cartItems.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = "<p>Your cart is empty.</p>";
+        totalElement.textContent = "0";
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const div = document.createElement("div");
+        div.className = "row cart-item align-items-center";
+        div.innerHTML = `
+        <div class="col-3"><img src="${item.image}" alt="${item.title}"></div>
+        <div class="col-3">${item.title}</div>
+        <div class="col-2">Rs ${item.price}</div>
+        <div class="col-2">
+          <input type="number" class="form-control" value="${item.quantity}" min="1"
+            onchange="updateQuantity(${index}, this.value)">
+        </div>
+        <div class="col-2">
+          <button class="btn btn-danger btn-sm" onclick="removeItem(${index})">Remove</button>
+        </div>
+      `;
+        cartItems.appendChild(div);
+      });
+
+      totalElement.textContent = total;
+    }
+
+    function updateQuantity(index, quantity) {
+      quantity = parseInt(quantity);
+      if (quantity < 1) return;
+      cart[index].quantity = quantity;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      // Hide cart, show bill
+      document.querySelector(".cart-container").style.display = "none";
+      document.getElementById("bill-summary").style.display = "block";
+
+      const username = localStorage.getItem("username") || "Guest";
+      document.getElementById("bill-username").textContent = username;
+
+      const billItems = document.getElementById("bill-items");
+      const billTotal = document.getElementById("bill-total");
+      billItems.innerHTML = "";
+
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+        const p = document.createElement("p");
+        p.textContent = `${item.title} x ${item.quantity} - Rs ${item.price * item.quantity}`;
+        billItems.appendChild(p);
+      });
+      billTotal.textContent = total;
+    }
+
+    function saveBill() {
+      const username = localStorage.getItem("username") || "Guest";
+      const total = document.getElementById("bill-total").textContent;
+      const address = document.getElementById("user-address").value.trim();
+      if (!address) {
+        alert("Please enter your address.");
+        return;
+      }
+      const billItems = cart.map(item => ({
+        title: item.title,
+        quantity: item.quantity,
+        price: item.price
+      }));
+
+      const billData = {
+        username: username,
+        items: billItems,
+        address: address,
+        total: total
+      };
+
+      fetch('http://localhost:3000/save-bill', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(billData)
+      })
+        .then(response => response.json())
+        .then(data => {
+          alert("Bill saved successfully!");
           localStorage.removeItem("cart");
-          renderCart();
-        }
-    
-        renderCart();
-      </script>
-      <br><br><br>
-      <footer class="footer">
-        <div>
-          <h4>Opening Hours</h4>
-          <p>Mon–Fri: 6am–5pm</p>
-          <p>Sat–Sun: 7am–4pm</p>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <p>123 Cupcake St.</p>
-          <p>Sweet Town, ST 45678</p>
-        </div>
-        <div class="social-icons">
-          <h4>Follow Us</h4>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-      </footer>
+          window.location.href = "Homepage.html";
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("Failed to save bill.");
+        });
+    }
+
+    renderCart();
+
+    const username = localStorage.getItem("username");
+    if (username) {
+      document.getElementById("usernameDisplay").textContent = `Hi, ${username}!`;
+    }
+
+    function logout() {
+      localStorage.removeItem("username");
+      window.location.href = "/";
+    }
+  </script>
+
+  <br><br><br>
+  <footer class="footer">
+    <div>
+      <h4>Opening Hours</h4>
+      <p>Mon–Fri: 6am–5pm</p>
+      <p>Sat–Sun: 7am–4pm</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>123 Cupcake St.</p>
+      <p>Sweet Town, ST 45678</p>
+    </div>
+    <div class="social-icons">
+      <h4>Follow Us</h4>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
 </body>
+
 </html>

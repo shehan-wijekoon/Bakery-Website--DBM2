@@ -31,7 +31,26 @@ mongoose.connect("mongodb://127.0.0.1:27017/bakerydb", {
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log("MongoDB error:", err));
 
-// Login route
+
+  // create pool
+  let pool;
+  
+  async function initOraclePool() {
+    try {
+      pool = await oracledb.createPool(oracleConfig);
+      console.log("Oracle DB pool created");
+    } catch (err) {
+      console.error("Error creating Oracle pool", err);
+    }
+  }
+  
+  initOraclePool();
+  
+  // Your app.use(), routes, etc. here
+  
+
+
+  // Login route
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -96,6 +115,8 @@ app.listen(PORT, () => {
 
 //plsql
 // Add a new product
+
+/*
 app.post("/add-item", async (req, res) => {
   const { name, price, description, image_url } = req.body;
 
@@ -144,5 +165,76 @@ app.delete("/delete-item/:id", async (req, res) => {
   } catch (err) {
     console.error("Oracle DELETE error:", err);
     res.status(500).json({ success: false, message: "Failed to delete item" });
+  }
+});
+
+*/
+
+// Get all products
+app.get("/items", async (req, res) => {
+  try {
+    const conn = await oracledb.getConnection(oracleConfig);
+    const result = await conn.execute(`SELECT * FROM items ORDER BY id DESC`);
+    await conn.close();
+
+    res.json(result.rows); // [ [id, name, price, desc, url], ... ]
+  } catch (err) {
+    console.error("Oracle SELECT error:", err);
+    res.status(500).json({ success: false, message: "Failed to fetch items" });
+  }
+});
+
+// Add Item
+app.post("/add-item", async (req, res) => {
+  const { name, price, description, image_url } = req.body;
+  try {
+    const conn = await pool.getConnection();
+    await conn.execute(
+      `BEGIN insert_item(:name, :price, :description, :image_url); END;`,
+      { name, price, description, image_url },
+      { autoCommit: true }
+    );
+    res.json({ message: "Item added successfully" });
+    conn.release();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to add item" });
+  }
+});
+
+// Update Item
+app.put("/update-item/:id", async (req, res) => {
+  const itemId = req.params.id;
+  const { name, price, description, image_url } = req.body;
+  try {
+    const conn = await pool.getConnection();
+    await conn.execute(
+      `BEGIN update_item(:id, :name, :price, :description, :image_url); END;`,
+      { id: itemId, name, price, description, image_url },
+      { autoCommit: true }
+    );
+    res.json({ message: "Item updated successfully" });
+    conn.release();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to update item" });
+  }
+});
+
+// Delete Item
+app.delete("/delete-item/:id", async (req, res) => {
+  const itemId = req.params.id;
+  try {
+    const conn = await pool.getConnection();
+    await conn.execute(
+      `BEGIN delete_item(:id); END;`,
+      { id: itemId },
+      { autoCommit: true }
+    );
+    res.json({ message: "Item deleted successfully" });
+    conn.release();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete item" });
   }
 });
